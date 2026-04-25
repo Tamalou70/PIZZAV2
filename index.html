@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Pizzeria RP V2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body { font-family: Arial; background:#111; color:white; padding:20px; }
+button { padding:15px; margin:10px; font-size:16px; }
+.card { background:#222; padding:20px; margin:10px; border-radius:10px; }
+</style>
+</head>
+
+<body>
+
+<h1>🍕 Pizzeria RP V2</h1>
+
+<div id="products"></div>
+
+<h2>🛒 Panier</h2>
+<div id="cart"></div>
+<button onclick="checkout()">Encaisser</button>
+
+<script>
+const supabase = window.supabase.createClient(
+"https://jkoqdmlqiztainozvdpi.supabase.co",
+"sb_publishable_1XzZDxrWhBTDDbjjN-d6Eg_M2aICPn-"
+);
+
+let cart = [];
+
+async function loadProducts() {
+let { data } = await supabase.from("products").select("*");
+
+products.innerHTML = data.map(p => `
+<div class="card">
+<h3>${p.name}</h3>
+<p>${p.price}$</p>
+<button onclick="add('${p.id}', '${p.name}', ${p.price})">Ajouter</button>
+</div>
+`).join("");
+}
+
+function add(id, name, price) {
+cart.push({id, name, price});
+renderCart();
+}
+
+function renderCart() {
+cart.innerHTML = cart.map(p => `
+<div>${p.name} - ${p.price}$</div>
+`).join("");
+}
+
+async function checkout() {
+for (let p of cart) {
+await supabase.from("sales").insert({
+product_name: p.name,
+quantity: 1,
+total: p.price,
+cashier: "vendeuse"
+});
+}
+alert("Vente enregistrée !");
+cart = [];
+renderCart();
+}
+
+loadProducts();
+</script>
+
+</body>
+</html>
