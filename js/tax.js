@@ -1,18 +1,22 @@
+function cleanDate(value) {
+  if (!value) return "";
+  return String(value).slice(0, 10);
+}
+
 function buildTaxData() {
   const taxDateEl = document.getElementById("taxDate");
-
   const info = weekInfo(taxDateEl?.value || todayInput());
 
   const weekSales = sales.filter(s =>
-    dateInRange(s.created_at, info.start, info.end)
+    dateInRange(cleanDate(s.created_at), info.start, info.end)
   );
 
   const weekDeliveries = deliveries.filter(d =>
-    dateInRange(d.date, info.start, info.end)
+    dateInRange(cleanDate(d.date), info.start, info.end)
   );
 
   const weekSalaries = salaries.filter(s =>
-    dateInRange(s.date, info.start, info.end)
+    dateInRange(cleanDate(s.date), info.start, info.end)
   );
 
   const salesTTC = weekSales.reduce(
