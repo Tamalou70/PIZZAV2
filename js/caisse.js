@@ -7,13 +7,12 @@ function stockByName(name) {
 }
 
 function pizzaImageHtml(p) {
-  if (p.image_url && p.image_url.trim()) {
-    return `
-      <img class="pizza-photo" src="${p.image_url}" alt="${p.name}"
-      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-      <div class="pizza-art hidden-fallback"></div>
-    `;
+  const image = (p.image_url || "").trim();
+
+  if (image) {
+    return `<img class="pizza-img" src="${image}" alt="${p.name}">`;
   }
+
   return `<div class="pizza-art"></div>`;
 }
 
@@ -22,7 +21,8 @@ function renderProducts() {
     return `
       <div class="pizza-card" onclick="addToCart('${p.id}')">
         ${pizzaImageHtml(p)}
-        <h3>${p.name}</h3>
+        <div class="pizza-title">${p.name}</div>
+        <div class="ingredients">${productRecipe(p.id).map(r => r.ingredient_name).join(', ')}</div>
         <div class="price-row">
           <div class="price">${fmt(p.price)}</div>
           <div class="plus">+</div>
@@ -33,9 +33,10 @@ function renderProducts() {
 }
 
 function addToCart(id) {
-  const p = products.find(x => x.id === id);
-  const found = cart.find(x => x.id === id);
+  const p = products.find(x => String(x.id) === String(id));
+  if (!p) return;
 
+  const found = cart.find(x => String(x.id) === String(id));
   if (found) found.qty++;
   else cart.push({ id: p.id, name: p.name, price: p.price, qty: 1 });
 
@@ -43,12 +44,12 @@ function addToCart(id) {
 }
 
 function renderCart() {
-  cartBox.innerHTML = cart.map(i =>
-    `<div class="cart-line">
+  cartBox.innerHTML = cart.map(i => `
+    <div class="cart-line">
       <span>${i.qty} × ${i.name}</span>
       <strong>${fmt(i.qty * i.price)}</strong>
-    </div>`
-  ).join("");
+    </div>
+  `).join("");
 
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const ht = total / 1.3;
