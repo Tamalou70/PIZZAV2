@@ -4,7 +4,7 @@ function refreshIngredients() {
   if (!recipeIngredientSelect) return;
 
   recipeIngredientSelect.innerHTML = ingredients
-    .map(i => `<option value="${i.name}">${i.name}</option>`)
+    .map(i => `<option value="${escapeHtml(i.name)}">${escapeHtml(i.name)}</option>`)
     .join("");
 }
 
@@ -20,10 +20,12 @@ function addRecipeLine() {
 }
 
 function renderRecipe() {
+  if (!recipeBuilderList) return;
+
   recipeBuilderList.innerHTML = recipeBuilder
     .map((r, index) => `
       <div class="badge">
-        ${r.ingredient_name} x${r.quantity}
+        ${escapeHtml(r.ingredient_name)} x${r.quantity}
         <button type="button" onclick="removeRecipeLine(${index})">×</button>
       </div>
     `)
@@ -73,28 +75,32 @@ async function savePizza() {
 }
 
 function adminPizzaMediaHtml(p) {
-  const url = (p.image_url || "").trim();
+  const url = String(p.image_url || "").trim();
 
   if (url) {
-    return `<img class="pizza-img" src="${url}" alt="${p.name}" loading="lazy" onerror="this.replaceWith(document.createElement('div')); this.className='pizza-art';">`;
+    return `
+      <img class="pizza-img pizza-photo" src="${escapeHtml(url)}" alt="${escapeHtml(p.name)}" loading="lazy"
+        onerror="this.style.display='none'; const fallback=this.nextElementSibling; if(fallback) fallback.classList.remove('hidden');" />
+      <div class="pizza-art hidden"></div>
+    `;
   }
 
   return `<div class="pizza-art"></div>`;
 }
 
 function renderAdminProducts() {
+  if (!adminProducts) return;
+
   refreshIngredients();
 
   adminProducts.innerHTML = products
     .map(p => `
-      <div class="pizza-card">
+      <div class="pizza-card admin-pizza-card">
         ${adminPizzaMediaHtml(p)}
-
-        <div class="pizza-title">${p.name}</div>
+        <div class="pizza-title">${escapeHtml(p.name)}</div>
         <div class="price">${fmt(p.price)}</div>
-
-        <div class="actions">
-          <button type="button" class="danger-btn" onclick="deletePizza(${p.id})">Supprimer</button>
+        <div class="actions admin-actions">
+          <button type="button" class="danger-btn" onclick="deletePizza('${String(p.id).replaceAll("'", "\\'")}')">Supprimer</button>
         </div>
       </div>
     `)
@@ -102,7 +108,7 @@ function renderAdminProducts() {
 }
 
 async function deletePizza(id) {
-  const pizza = products.find(p => p.id === id);
+  const pizza = products.find(p => String(p.id) === String(id));
   const name = pizza ? pizza.name : "cette pizza";
 
   if (!confirm(`Supprimer ${name} ?`)) return;
