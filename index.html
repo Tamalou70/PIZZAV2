@@ -100,20 +100,23 @@
           <div class="chip">Direction</div>
         </div>
 
-        <div class="card">
-          <h3 id="pizzaFormTitle">Créer une pizza</h3>
-          <input id="editingPizzaId" type="hidden" />
-          <div class="grid2">
-            <div><label>Nom pizza</label><input id="pizzaName" placeholder="Ex: 4 Fromages" /></div>
-            <div><label>Prix TTC</label><input id="pizzaPrice" type="number" placeholder="Ex: 150" /></div>
-          </div>
-          <label>Recette : ingrédient:quantité séparés par virgule</label>
-          <input id="pizzaRecipe" placeholder="Ex: farine:1,eau:1,sel:1,fromage:4" />
-          <div class="actions">
-            <button class="primary-btn" onclick="savePizza()">Enregistrer pizza</button>
-            <button class="secondary-btn" onclick="resetPizzaForm()">Annuler</button>
-          </div>
-        </div>
+<div class="card">
+  <h3>Créer une pizza</h3>
+
+  <input id="pizzaName" placeholder="Nom pizza">
+  <input id="pizzaPrice" type="number" placeholder="Prix">
+
+  <input id="pizzaImageUrl" placeholder="Lien image Discord">
+
+  <select id="recipeIngredientSelect"></select>
+  <input id="recipeQuantityInput" type="number" placeholder="Quantité">
+
+  <button onclick="addRecipeLine()">Ajouter ingrédient</button>
+
+  <div id="recipeBuilderList"></div>
+
+  <button onclick="savePizza()">Créer pizza</button>
+</div>
 
         <h3>Pizzas existantes</h3>
         <div id="adminProducts" class="admin-grid"></div>
