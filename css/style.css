@@ -252,6 +252,19 @@ body {
   margin-bottom: 14px;
 }
 
+/* Correction taille images pizzas */
+.pizza-card img {
+  width: 100%;
+  height: 180px;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 22px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+
+
 .pizza-title { font-size: 20px; font-weight: 900; }
 .price { font-size: 26px; font-weight: 900; color: var(--red); }
 
