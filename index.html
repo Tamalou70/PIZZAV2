@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Pizzeria RP</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<h1>Pizzeria RP</h1>
+
+<div id="login">
+<input id="discordInput" placeholder="Identifiant">
+<button onclick="login()">Connexion</button>
+</div>
+
+<div id="app" style="display:none">
+
+<h2>Créer pizza</h2>
+<input id="pizzaName" placeholder="Nom">
+<input id="pizzaPrice" type="number" placeholder="Prix">
+<input id="pizzaImageUrl" placeholder="Image Discord">
+
+<select id="recipeIngredientSelect"></select>
+<input id="recipeQuantityInput" type="number" placeholder="Quantité">
+
+<button onclick="addRecipeLine()">Ajouter ingrédient</button>
+<div id="recipeBuilderList"></div>
+
+<button onclick="savePizza()">Créer</button>
+
+<h2>Caisse</h2>
+<div id="products"></div>
+<div id="cart"></div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
