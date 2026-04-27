@@ -252,24 +252,214 @@ body {
   margin-bottom: 14px;
 }
 
-/* === FIX IMAGE PIZZA (AJOUT) === */
-.pizza-photo {
-  width: 100%;
-  height: 132px;
-  object-fit: cover;
-  border-radius: 22px;
-  display: block;
-  margin-bottom: 14px;
-}
-
-.hidden-fallback {
-  display: none;
-}
-
 .pizza-title { font-size: 20px; font-weight: 900; }
 .price { font-size: 26px; font-weight: 900; color: var(--red); }
 
-/* ... le reste inchangé ... */
+.ingredients {
+  color: var(--muted);
+  font-size: 13px;
+  min-height: 34px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.plus {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background: var(--green);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.receipt {
+  background: #211713;
+  color: white;
+  border-radius: 32px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 24px;
+  height: fit-content;
+}
+
+.receipt h3 { margin: 0 0 16px; font-size: 24px; }
+
+.receipt-line,
+.cart-line {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(255,255,255,.18);
+  padding: 12px 0;
+  color: #f9ead8;
+}
+
+.receipt-total {
+  margin-top: 22px;
+  padding: 18px;
+  background: rgba(255,255,255,.08);
+  border-radius: 22px;
+}
+
+.receipt-big {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 16px;
+  padding: 15px 16px;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 16px;
+}
+
+button {
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--red), var(--orange));
+  color: white;
+}
+
+.success-btn {
+  background: var(--green);
+  color: white;
+}
+
+.danger-btn {
+  background: var(--red);
+  color: white;
+}
+
+.secondary-btn {
+  background: rgba(255,255,255,.12);
+  color: inherit;
+}
+
+.export-btn {
+  background: var(--blue);
+  color: white;
+}
+
+.full { width: 100%; }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+th,
+td {
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+th {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.table-card {
+  overflow-x: auto;
+}
+
+.badge {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(245, 158, 11, .13);
+  color: #7c2d12;
+  font-weight: 900;
+  font-size: 12px;
+  margin: 2px;
+}
+
+.error,
+.red { color: var(--red); }
+
+.green { color: var(--green); }
+
+.gold { color: var(--gold); }
+
+.tax-sheet {
+  background: #211713;
+  color: white;
+  border-radius: 32px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.tax-sheet h3 {
+  margin: 0 0 12px;
+  color: var(--gold);
+}
+
+.tax-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(255,255,255,.18);
+}
+
+.tax-total {
+  margin-top: 18px;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold);
+  display: flex;
+  justify-content: space-between;
+}
 
 @media (max-width: 950px) {
   .login-screen,
