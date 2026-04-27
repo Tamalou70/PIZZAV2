@@ -37,7 +37,7 @@ async function adjustStock() {
 
 async function updateIngredient(id) {
   const ingredient = ingredients.find(i => String(i.id) === String(id));
-  if (!ingredient) return;
+  if (!ingredient) return alert("Ingrédient introuvable.");
 
   const stock = prompt(`Nouveau stock pour ${ingredient.name}`, ingredient.stock);
   if (stock === null) return;
@@ -57,7 +57,7 @@ async function updateIngredient(id) {
 
 async function deleteIngredient(id) {
   const ingredient = ingredients.find(i => String(i.id) === String(id));
-  if (!ingredient) return;
+  if (!ingredient) return alert("Ingrédient introuvable.");
 
   if (!confirm(`Supprimer ${ingredient.name} ?`)) return;
 
@@ -68,22 +68,23 @@ async function deleteIngredient(id) {
 }
 
 function renderStock() {
-  stockTable.innerHTML = ingredients.map(i => {
-    const bad = Number(i.stock) <= Number(i.min_stock);
-
-    return `
-      <tr>
-        <td>${i.name}</td>
-        <td>${i.stock}</td>
-        <td>${i.min_stock}</td>
-        <td><span class="badge ${bad ? 'red' : 'green'}">${bad ? 'À racheter' : 'OK'}</span></td>
-        <td class="actions">
-          <button class="secondary-btn" onclick="updateIngredient('${i.id}')">Modifier</button>
-          <button class="danger-btn" onclick="deleteIngredient('${i.id}')">Supprimer</button>
-        </td>
-      </tr>
-    `;
-  }).join("");
+  stockTable.innerHTML = ingredients
+    .map(i => {
+      const bad = Number(i.stock) <= Number(i.min_stock);
+      return `
+        <tr>
+          <td>${i.name}</td>
+          <td>${i.stock}</td>
+          <td>${i.min_stock}</td>
+          <td><span class="badge ${bad ? 'red' : 'green'}">${bad ? 'À racheter' : 'OK'}</span></td>
+          <td>
+            <button type="button" class="secondary-btn" onclick="updateIngredient(${i.id})">Modifier</button>
+            <button type="button" class="danger-btn" onclick="deleteIngredient(${i.id})">Supprimer</button>
+          </td>
+        </tr>
+      `;
+    })
+    .join("");
 
   stockIngredient.innerHTML = ingredients
     .map(i => `<option value="${i.id}">${i.name}</option>`)
