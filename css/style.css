@@ -1,60 +1,301 @@
+/* Pizzeria RP V2 PRO - Design client validé */
+:root {
+  --bg: #f7f3ec;
+  --dark: #1f1a17;
+  --cream: #fffaf2;
+  --red: #b91c1c;
+  --red2: #dc2626;
+  --green: #15803d;
+  --orange: #ea580c;
+  --gold: #f59e0b;
+  --blue: #0284c7;
+  --muted: #7c6f64;
+  --line: #e7d8c6;
+  --shadow: 0 20px 50px rgba(31, 26, 23, .12);
+}
+
+* { box-sizing: border-box; }
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
   margin: 0;
-  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
 }
 
-/* CONTENEUR PRODUITS */
-#products {
+.hidden { display: none !important; }
+
+.app-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 28px;
+  background: #1f1a17;
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.app-top h1 { margin: 0; font-size: 24px; }
+.app-top p { margin: 6px 0 0; color: #d8c7b2; }
+
+.top-user {
+  text-align: right;
+  color: #d8c7b2;
+  font-size: 13px;
+}
+
+.login-screen {
+  min-height: calc(100vh - 82px);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: 1.05fr .95fr;
 }
 
-/* CARTE PRODUIT */
-.product {
+.brand-panel {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(245, 158, 11, .22), transparent 26%),
+    radial-gradient(circle at 90% 90%, rgba(185, 28, 28, .22), transparent 30%),
+    linear-gradient(135deg, #2b1512, #6f1d1b);
+  color: white;
+  padding: 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 900;
+  font-size: 24px;
+}
+
+.logo-mark,
+.side-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #fff3d8;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  color: var(--red);
+}
+
+.hero h2 {
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: .95;
+  margin: 0 0 20px;
+}
+
+.hero p {
+  color: #ffe9d0;
+  font-size: 18px;
+  max-width: 560px;
+  line-height: 1.55;
+}
+
+.login-panel {
+  display: grid;
+  place-items: center;
+  padding: 54px;
+}
+
+.login-card {
+  width: min(440px, 100%);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+  padding: 34px;
+}
+
+.login-card h2 { margin: 0 0 8px; font-size: 30px; }
+.login-card p { color: var(--muted); }
+
+.app-layout {
+  min-height: calc(100vh - 82px);
+  display: grid;
+  grid-template-columns: 105px 1fr;
+}
+
+.sidebar {
+  background: #211713;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.side-logo { margin-bottom: 16px; }
+
+.side-btn {
+  width: 76px;
+  min-height: 68px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  color: #f9ead8;
+  background: rgba(255,255,255,.08);
+  border: 0;
+  cursor: pointer;
+  font-size: 23px;
+}
+
+.side-btn span {
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.side-btn.active {
+  background: var(--red);
+}
+
+.content {
+  padding: 28px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.page-header p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.chip {
   background: white;
-  border-radius: 20px;
-  padding: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  text-align: center;
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-weight: 800;
 }
 
-/* IMAGE PIZZA (FIX PRINCIPAL) */
+.cashier-layout {
+  display: grid;
+  grid-template-columns: 1fr 390px;
+  gap: 22px;
+}
+
+.toolbar {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 25px rgba(31,26,23,.06);
+}
+
+.toolbar input { margin: 0; }
+
+.category-pill {
+  padding: 13px 16px;
+  border-radius: 16px;
+  background: #fff3d8;
+  color: #7c2d12;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.pizza-grid,
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.pizza-card,
+.card,
+.table-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 18px;
+  box-shadow: 0 12px 30px rgba(31,26,23,.08);
+  margin-bottom: 18px;
+}
+
+.pizza-card {
+  cursor: pointer;
+  transition: .15s;
+}
+
+.pizza-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 42px rgba(31,26,23,.12);
+}
+
+.pizza-art {
+  height: 132px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 35% 35%, #fee2a5 0 8%, transparent 9%),
+    radial-gradient(circle at 63% 42%, #ef4444 0 7%, transparent 8%),
+    radial-gradient(circle at 45% 72%, #16a34a 0 5%, transparent 6%),
+    radial-gradient(circle, #f59e0b 0 48%, #b45309 49% 62%, #fff7ed 63%);
+  margin-bottom: 14px;
+}
+
+/* === FIX IMAGE PIZZA (AJOUT) === */
 .pizza-photo {
   width: 100%;
-  height: 140px;
+  height: 132px;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 22px;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
-/* FALLBACK SI IMAGE KO */
-.pizza-art {
-  width: 100%;
-  height: 140px;
-  background: linear-gradient(135deg, orange, red);
-  border-radius: 15px;
-  margin-bottom: 10px;
-}
-
-/* CACHE PAR DÉFAUT */
 .hidden-fallback {
   display: none;
 }
 
-/* BOUTON */
-button {
-  background: #ff6b00;
-  border: none;
-  padding: 10px;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-}
+.pizza-title { font-size: 20px; font-weight: 900; }
+.price { font-size: 26px; font-weight: 900; color: var(--red); }
 
-button:hover {
-  background: #e55a00;
+/* ... le reste inchangé ... */
+
+@media (max-width: 950px) {
+  .login-screen,
+  .cashier-layout,
+  .app-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .side-btn {
+    min-width: 76px;
+  }
+
+  .brand-panel {
+    min-height: 380px;
+  }
+
+  .grid2,
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
 }
